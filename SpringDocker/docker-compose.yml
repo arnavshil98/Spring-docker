@@ -1,0 +1,33 @@
+version: '3'
+services:
+  backend:
+    build: . # this means that it will look for Dockerfile in the same directory
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/docker
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    depends_on:
+      - db
+    networks:
+      - spring-mysql
+
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=docker
+    ports:
+      - "3307:3306" # Corrected port mapping
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - spring-mysql
+
+volumes:
+  db-data:
+
+networks:
+  spring-mysql:
