@@ -1,7 +1,9 @@
 version: '3'
 services:
   backend:
-    build: . # this means that it will look for Dockerfile in the same directory
+#    build: . # this means that it will look for Dockerfile in the same directory
+#    image: shilspringdocker:v1 # this will be explicit name for the image locally
+    image: arnavshil/springdocker-repo:latest
     ports:
       - "8080:8080"
     environment:
